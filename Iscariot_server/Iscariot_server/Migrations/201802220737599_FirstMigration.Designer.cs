@@ -13,7 +13,7 @@ namespace Iscariot_server.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201802150740544_FirstMigration"; }
+            get { return "201802220737599_FirstMigration"; }
         }
         
         string IMigrationMetadata.Source

@@ -8,6 +8,17 @@ namespace Iscariot_server.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.LogPass",
+                c => new
+                    {
+                        Login = c.String(nullable: false, maxLength: 128),
+                        PassHash = c.String(),
+                        Email = c.String(),
+                        NeedAuth = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Login);
+            
+            CreateTable(
                 "dbo.Schedule",
                 c => new
                     {
@@ -38,6 +49,7 @@ namespace Iscariot_server.Migrations
         public override void Down()
         {
             DropTable("dbo.Schedule");
+            DropTable("dbo.LogPass");
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Iscariot_server.DAL
         }
 
         public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<LogPass> LogPasses { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
