@@ -15,14 +15,14 @@ namespace Iscariot_server.Controllers
         static Iscariot_DB_Context db = new Iscariot_DB_Context();
         public JObject Get()
         {
-            return new JObject(new { status="fail" });
+            return JObject.FromObject(new { status="fail" });
         }
 
         // GET: api/Schedule/5
         public JObject Get(string faculty, string specialty, string section, int term)
         {
             var res = db.Schedules.FirstOrDefault((x) => x.Faculty == faculty && x.Specialty == specialty && x.Section == section && x.Term == term);
-            return new JObject(new { status = res == null ? "ok" : "fail" }, res);
+            return JObject.FromObject(new { status = res == null ? "ok" : "fail", schedule = JObject.FromObject(res) });
         }
 
         // POST: api/Schedule

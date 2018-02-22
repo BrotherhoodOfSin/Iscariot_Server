@@ -19,11 +19,11 @@ namespace Iscariot_server.Controllers
         // GET: api/LogPass
         public JObject Get()
         {
-            return new JObject(new { status = "access denied" });
+            return JObject.FromObject(new { status = "access denied" });
         }
 
         // GET: api/LogPass/5
-        public string Get(string login, string password)
+        public JObject Get(string login, string password)
         {
             /* Fetch the stored value */
             string savedPasswordHash = db.LogPasses.FirstOrDefault(u => u.Login == login).PassHash;
@@ -39,7 +39,7 @@ namespace Iscariot_server.Controllers
             for (int i = 0; i < 20; i++)
                 if (hashBytes[i + 16] != hash[i])
                     throw new UnauthorizedAccessException();
-            return "value";
+            return JObject.FromObject(new { status = "access granted" });
         }
 
         // POST: api/LogPass
@@ -48,7 +48,7 @@ namespace Iscariot_server.Controllers
             string pattern = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$";
             if (!Regex.IsMatch(email, pattern))
             {
-                return new JObject(new { status = "Invalid email format" });
+                return JObject.FromObject(new { status = "Invalid email format" });
             }
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
@@ -59,7 +59,7 @@ namespace Iscariot_server.Controllers
             Array.Copy(hash, 0, hashBytes, 16, 20);
             string savedPasswordHash = Convert.ToBase64String(hashBytes);
             db.LogPasses.Add(new Models.LogPass{ Login = login, PassHash = savedPasswordHash, Email = email, NeedAuth = needAuth });
-            return new JObject(new { status = "OK" });
+            return JObject.FromObject(new { status = "OK" });
         }
     }
 }
