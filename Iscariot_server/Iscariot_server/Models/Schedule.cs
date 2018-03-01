@@ -15,7 +15,7 @@ namespace Iscariot_server.Models
         public string Monday_Ch { get; set; }
         public string Monday_Z      {get;set;}
         public string Tuesday_Ch    {get;set;}
-        public string Tueday_Z      {get;set;}
+        public string Tuesday_Z      {get;set;}
         public string Wednesday_Ch  {get;set;}
         public string Wednesday_Z   {get;set;}
         public string Thursday_Ch   {get;set;}

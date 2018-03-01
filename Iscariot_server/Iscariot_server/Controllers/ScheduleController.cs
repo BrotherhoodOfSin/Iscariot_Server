@@ -60,7 +60,7 @@ namespace Iscariot_server.Controllers
             if(CurrentMemory.CurrentUsers.Find(x => x.Token == token).Token != Guid.Empty)
             {
                 var res = db.Schedules.FirstOrDefault((x) => x.Faculty == faculty && x.Specialty == specialty && x.Section == section && x.Term == term);
-                db.Schedules.Add(new Models.Schedule
+                Models.Schedule tmp = new Models.Schedule
                 {
                     Id = res == null ? Guid.NewGuid() : res.Id,
                     Faculty = faculty,
@@ -70,7 +70,7 @@ namespace Iscariot_server.Controllers
                     Monday_Ch = monday_ch,
                     Monday_Z = monday_z,
                     Tuesday_Ch = tuesday_ch,
-                    Tueday_Z = tuesday_z,
+                    Tuesday_Z = tuesday_z,
                     Wednesday_Ch = wednesday_ch,
                     Wednesday_Z = wednesday_z,
                     Thursday_Ch = thursday_ch,
@@ -81,8 +81,11 @@ namespace Iscariot_server.Controllers
                     Saturday_Z = saturday_z,
                     Sunday_Ch = sunday_ch,
                     Sunday_Z = sunday_z
-                });
+                };
+                db.Schedules.Add(tmp);
                 db.SaveChanges();
+
+
                 return JObject.FromObject(new { status = "ok" });
             }
             else
