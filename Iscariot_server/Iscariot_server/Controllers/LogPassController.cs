@@ -35,8 +35,12 @@ namespace Iscariot_server.Controllers
                 if (hashBytes[i + 16] != hash[i])
                     throw new UnauthorizedAccessException();
 
-            CurrentMemory.CurrentUsers.Add((new Models.LogPass { Login = login, PassHash = savedPasswordHash }, Guid.NewGuid()));
-            return JObject.FromObject(new { status = "ok", token = CurrentMemory.CurrentUsers.Last().Token });
+            Guid token;
+            if (CurrentMemory.CurrentUsers.Select(x => x.User.Login == login).Count() == 0)
+                CurrentMemory.CurrentUsers.Add((new Models.LogPass { Login = login, PassHash = savedPasswordHash }, token = Guid.NewGuid(), DateTime.Now));
+            else
+                token = CurrentMemory.CurrentUsers.First(x => x.User.Login == login).Token;
+            return JObject.FromObject(new { status = "ok", token });
         }
 
         // POST: api/LogPass

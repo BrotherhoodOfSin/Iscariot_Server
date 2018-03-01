@@ -11,19 +11,7 @@ namespace Iscariot_server.DAL
     {
         protected override void Seed(Iscariot_DB_Context context)
         {
-            List<Schedule> temp = new List<Schedule>
-            {
-                new Schedule{Id=Guid.NewGuid(), Faculty = "FMF", Specialty = "PMI", Section = "MIM", Term = 1, Monday_Ch = "1,2,3", Monday_Z = "2,3,4", Tuesday_Ch = "1,2", Tueday_Z = "1,2,3,4", Wednesday_Ch = "1,2", Wednesday_Z = "3", Thursday_Ch = "1,2", Thursday_Z = "1,2", Friday_Ch = "1", Friday_Z = "1", Saturday_Ch ="", Saturday_Z="", Sunday_Ch ="", Sunday_Z = "" },
-                new Schedule{Id=Guid.NewGuid(), Faculty = "FMF", Specialty = "PMI", Section = "MIM", Term = 2, Monday_Ch = "1,2,3", Monday_Z = "2,3,4", Tuesday_Ch = "1,2", Tueday_Z = "1,2,3,4", Wednesday_Ch = "1,2", Wednesday_Z = "3", Thursday_Ch = "1,2", Thursday_Z = "1,2", Friday_Ch = "1", Friday_Z = "1", Saturday_Ch ="", Saturday_Z="", Sunday_Ch ="", Sunday_Z = "" },
-                new Schedule{Id=Guid.NewGuid(), Faculty = "FMF", Specialty = "PMI", Section = "MIM", Term = 3, Monday_Ch = "1,2,3", Monday_Z = "2,3,4", Tuesday_Ch = "1,2", Tueday_Z = "1,2,3,4", Wednesday_Ch = "1,2", Wednesday_Z = "3", Thursday_Ch = "1,2", Thursday_Z = "1,2", Friday_Ch = "1", Friday_Z = "1", Saturday_Ch ="", Saturday_Z="", Sunday_Ch ="", Sunday_Z = "" },
-                new Schedule{Id=Guid.NewGuid(), Faculty = "FMF", Specialty = "PMI", Section = "MIM", Term = 4, Monday_Ch = "1,2,3", Monday_Z = "2,3,4", Tuesday_Ch = "1,2", Tueday_Z = "1,2,3,4", Wednesday_Ch = "1,2", Wednesday_Z = "3", Thursday_Ch = "1,2", Thursday_Z = "1,2", Friday_Ch = "1", Friday_Z = "1", Saturday_Ch ="", Saturday_Z="", Sunday_Ch ="", Sunday_Z = "" },
-                new Schedule{Id=Guid.NewGuid(), Faculty = "FMF", Specialty = "PIL", Section = "MIM", Term = 1, Monday_Ch = "1,2,3", Monday_Z = "2,3,4", Tuesday_Ch = "1,2", Tueday_Z = "1,2,3,4", Wednesday_Ch = "1,2", Wednesday_Z = "3", Thursday_Ch = "1,2", Thursday_Z = "1,2", Friday_Ch = "1", Friday_Z = "1", Saturday_Ch ="", Saturday_Z="", Sunday_Ch ="", Sunday_Z = "" },
-                new Schedule{Id=Guid.NewGuid(), Faculty = "FMF", Specialty = "PIL", Section = "MIM", Term = 2, Monday_Ch = "1,2,3", Monday_Z = "2,3,4", Tuesday_Ch = "1,2", Tueday_Z = "1,2,3,4", Wednesday_Ch = "1,2", Wednesday_Z = "3", Thursday_Ch = "1,2", Thursday_Z = "1,2", Friday_Ch = "1", Friday_Z = "1", Saturday_Ch ="", Saturday_Z="", Sunday_Ch ="", Sunday_Z = "" },
-                new Schedule{Id=Guid.NewGuid(), Faculty = "FMF", Specialty = "PIL", Section = "MIM", Term = 3, Monday_Ch = "1,2,3", Monday_Z = "2,3,4", Tuesday_Ch = "1,2", Tueday_Z = "1,2,3,4", Wednesday_Ch = "1,2", Wednesday_Z = "3", Thursday_Ch = "1,2", Thursday_Z = "1,2", Friday_Ch = "1", Friday_Z = "1", Saturday_Ch ="", Saturday_Z="", Sunday_Ch ="", Sunday_Z = "" },
-                new Schedule{Id=Guid.NewGuid(), Faculty = "FMF", Specialty = "PIL", Section = "MIM", Term = 4, Monday_Ch = "1,2,3", Monday_Z = "2,3,4", Tuesday_Ch = "1,2", Tueday_Z = "1,2,3,4", Wednesday_Ch = "1,2", Wednesday_Z = "3", Thursday_Ch = "1,2", Thursday_Z = "1,2", Friday_Ch = "1", Friday_Z = "1", Saturday_Ch ="", Saturday_Z="", Sunday_Ch ="", Sunday_Z = "" },
-            };
-            temp.ForEach(x => context.Schedules.Add(x));
-            context.SaveChanges();
+
         }
     }
 }
