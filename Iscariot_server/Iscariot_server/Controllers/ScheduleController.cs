@@ -45,7 +45,9 @@ namespace Iscariot_server.Controllers
         public JObject Get(string faculty, string specialty, string section, int term)
         {
             var res = db.Schedules.FirstOrDefault((x) => x.Faculty == faculty && x.Specialty == specialty && x.Section == section && x.Term == term);
-            return JObject.FromObject(new { status = res != null ? "ok" : "fail", schedule = JObject.FromObject(res ?? new Models.Schedule()) });
+            var schedule = JObject.FromObject(res ?? new Models.Schedule());
+            schedule.Remove("Id");
+            return JObject.FromObject(new { status = res != null ? "ok" : "fail", schedule });
         }
 
         // POST: api/Schedule
