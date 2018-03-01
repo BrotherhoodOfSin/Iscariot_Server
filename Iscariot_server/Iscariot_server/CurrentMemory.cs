@@ -14,6 +14,16 @@ namespace Iscariot_server
         static CurrentMemory()
         {
             CurrentUsers = new List<(Models.LogPass User, Guid Token, DateTime LogTime)>();
+            h = new Timer()
+            {
+                Interval = 2 * 60 * 60 * 1000
+            };
+            h.Elapsed += H_Elapsed;
+        }
+
+        private static void H_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            
         }
     }
 }

@@ -13,9 +13,32 @@ namespace Iscariot_server.Controllers
     {
         //Внимание - ты сейчас немножкол удивишься
         static Iscariot_DB_Context db = new Iscariot_DB_Context();
-        public JObject Get()
+        public JArray Get()
         {
-            return JObject.FromObject(new { status="fail" });
+            //List<string> facs = db.Database.ExecuteSqlCommand("SELECT Faculty FROM Schedule GROUP BY Faculty");
+            var qwery = (from A in db.Schedules select A.Faculty).Distinct().ToList();
+            return JArray.FromObject(qwery);
+        }
+
+        public JArray Get(string faculty)
+        {
+            //List<string> facs = db.Database.ExecuteSqlCommand("SELECT Faculty FROM Schedule GROUP BY Faculty");
+            var qwery = (from A in db.Schedules where A.Faculty == faculty select A.Specialty).Distinct().ToList();
+            return JArray.FromObject(qwery);
+        }
+
+        public JArray Get(string faculty, string specialty)
+        {
+            //List<string> facs = db.Database.ExecuteSqlCommand("SELECT Faculty FROM Schedule GROUP BY Faculty");
+            var qwery = (from A in db.Schedules where A.Faculty == faculty & A.Specialty == specialty select A.Section).Distinct().ToList();
+            return JArray.FromObject(qwery);
+        }
+
+        public JArray Get(string faculty, string specialty, string section)
+        {
+            //List<string> facs = db.Database.ExecuteSqlCommand("SELECT Faculty FROM Schedule GROUP BY Faculty");
+            var qwery = (from A in db.Schedules where A.Faculty == faculty & A.Specialty == specialty & A.Section == section select A.Term).Distinct().ToList();
+            return JArray.FromObject(qwery);
         }
 
         // GET: api/Schedule/5
