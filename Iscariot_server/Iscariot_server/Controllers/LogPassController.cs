@@ -25,21 +25,18 @@ namespace Iscariot_server.Controllers
         // GET: api/LogPass/5
         public JObject Get(string login, string password)
         {
-            /* Fetch the stored value */
             string savedPasswordHash = db.LogPasses.FirstOrDefault(u => u.Login == login).PassHash;
-            /* Extract the bytes */
             byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
-            /* Get the salt */
             byte[] salt = new byte[16];
             Array.Copy(hashBytes, 0, salt, 0, 16);
-            /* Compute the hash on the password the user entered */
             var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
             byte[] hash = pbkdf2.GetBytes(20);
-            /* Compare the results */
             for (int i = 0; i < 20; i++)
                 if (hashBytes[i + 16] != hash[i])
                     throw new UnauthorizedAccessException();
-            return JObject.FromObject(new { status = "access granted" });
+
+            CurrentMemory.CurrentUsers.Add((new Models.LogPass { Login = login, PassHash = savedPasswordHash }, Guid.NewGuid()));
+            return JObject.FromObject(new { status = "ok", token = CurrentMemory.CurrentUsers.Last().Token });
         }
 
         // POST: api/LogPass
@@ -58,7 +55,9 @@ namespace Iscariot_server.Controllers
             Array.Copy(salt, 0, hashBytes, 0, 16);
             Array.Copy(hash, 0, hashBytes, 16, 20);
             string savedPasswordHash = Convert.ToBase64String(hashBytes);
+
             db.LogPasses.Add(new Models.LogPass{ Login = login, PassHash = savedPasswordHash, Email = email, NeedAuth = needAuth });
+            db.SaveChanges();
             return JObject.FromObject(new { status = "OK" });
         }
     }
