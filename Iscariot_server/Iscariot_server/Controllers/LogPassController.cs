@@ -36,7 +36,7 @@ namespace Iscariot_server.Controllers
                     throw new UnauthorizedAccessException();
 
             Guid token;
-            if (CurrentMemory.CurrentUsers.Select(x => x.User.Login == login).Count() == 0)
+            if (CurrentMemory.CurrentUsers.Find(x => x.User.Login == login).Token == Guid.Empty)
                 CurrentMemory.CurrentUsers.Add((new Models.LogPass { Login = login, PassHash = savedPasswordHash }, token = Guid.NewGuid(), DateTime.Now));
             else
                 token = CurrentMemory.CurrentUsers.First(x => x.User.Login == login).Token;
